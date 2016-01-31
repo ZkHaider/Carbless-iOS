@@ -6,8 +6,10 @@
 //  Copyright © 2016 ZkHaider. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "DishViewController.h"
 #import "DishCollectionViewCell.h"
+#import "CuisineViewCell.h"
 
 @interface DishViewController ()
 
@@ -18,16 +20,42 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    // Set delegates to the collectionview
-    self.dishCollectionView.delegate = self;
-    self.dishCollectionView.dataSource = self;
-    
-    self.title = @"Low Carb Meals";
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Set delegates to the collectionview
+    self.dishCollectionView.delegate = self;
+    self.dishCollectionView.dataSource = self;
+    
+    // Hide the nav bar
+    [[self navigationController] setNavigationBarHidden:YES];
+    
+    // Get the height of the header view and the height of the navigation bar
+    CGFloat headerViewHeight = self.headerView.bounds.size.height;
+    
+    // Make a UIEdgeInset with that height and set it to the UICollectionView
+    UIEdgeInsets topDishCollectionViewInset = UIEdgeInsetsMake(headerViewHeight + 4, 4, 4, 4);
+    self.dishCollectionView.contentInset = topDishCollectionViewInset;
+    
+    // Add a shadow to the headerview
+    self.headerView.layer.masksToBounds = NO;
+    self.headerView.layer.shadowOffset = CGSizeMake(0, 4);
+    self.headerView.layer.shadowRadius = 5;
+    self.headerView.layer.shadowOpacity = 0.5;
+    
+    // Brings the header view to the front
+    [self.headerView.superview bringSubviewToFront:self.headerView];
+    
+    // Change textfield border color
+    self.searchCuisineTextField.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.searchCuisineTextField.layer.borderWidth = 1.5;
+    self.searchCuisineTextField.layer.cornerRadius = 15.0;
+    
+    // Set done to textfield
+    [self.searchCuisineTextField setReturnKeyType:UIReturnKeySearch];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -62,22 +90,31 @@
     
     // Substract the layout margins...
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *) collectionViewLayout;
-    cellWidth -= flowLayout.sectionInset.left + flowLayout.sectionInset.right + flowLayout.minimumInteritemSpacing;
+    
+    CGFloat sectionInsetLeft    = flowLayout.sectionInset.left;
+    CGFloat sectionInsetRight   = flowLayout.sectionInset.right;
+    CGFloat contentInsetLeft    = collectionView.contentInset.left;
+    CGFloat contentInsetRight   = collectionView.contentInset.right;
+    
+    CGFloat totalSectionInset = sectionInsetLeft + sectionInsetRight;
+    CGFloat totalContentInset = contentInsetLeft + contentInsetRight;
+    
+    cellWidth -= totalSectionInset + totalContentInset + flowLayout.minimumInteritemSpacing;
     
     // Half of it because 1 cell
     cellWidth /= 2.0;
     
-    return CGSizeMake(cellWidth, 250);
+    return CGSizeMake(cellWidth, cellWidth);
 }
 
 # pragma mark - CollectionView Datasource
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    DishCollectionViewCell *dishCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"dishCollectionViewCell" forIndexPath:indexPath];
+    CuisineViewCell *cuisineViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cuisineViewCell" forIndexPath:indexPath];
     
     // Setup cell here...
     
-    return dishCell;
+    return cuisineViewCell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -86,13 +123,6 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
-}
-
-# pragma mark - CollectionView FlowLayout Delegate
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    // Calculate combined item width
-    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 /*

@@ -10,6 +10,8 @@
 		4B127EFB1C4E2F8900882EFC /* DishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B127EFA1C4E2F8900882EFC /* DishViewController.m */; };
 		4B127EFE1C4E2FF400882EFC /* DishCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B127EFD1C4E2FF400882EFC /* DishCollectionView.m */; };
 		4B127F011C4E327600882EFC /* DishCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B127F001C4E327600882EFC /* DishCollectionViewCell.m */; };
+		4B62E4431C5E1CAB008B27AC /* CuisineDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B62E4421C5E1CAB008B27AC /* CuisineDataSource.m */; };
+		4B6327D41C5E014900429E10 /* CuisineViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6327D31C5E014900429E10 /* CuisineViewCell.m */; };
 		4B98D5511C4CF7BA00D4E62E /* MainCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B98D5501C4CF7BA00D4E62E /* MainCollectionViewCell.m */; };
 		4BCA0DB01C4CECF200697F93 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BCA0DAF1C4CECF200697F93 /* Launch Screen.storyboard */; };
 		4BE532591C4A46BF00493063 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BE532581C4A46BF00493063 /* main.m */; };
@@ -56,6 +58,10 @@
 		4B127EFD1C4E2FF400882EFC /* DishCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishCollectionView.m; sourceTree = "<group>"; };
 		4B127EFF1C4E327600882EFC /* DishCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishCollectionViewCell.h; sourceTree = "<group>"; };
 		4B127F001C4E327600882EFC /* DishCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishCollectionViewCell.m; sourceTree = "<group>"; };
+		4B62E4411C5E1CAB008B27AC /* CuisineDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CuisineDataSource.h; sourceTree = "<group>"; };
+		4B62E4421C5E1CAB008B27AC /* CuisineDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CuisineDataSource.m; sourceTree = "<group>"; };
+		4B6327D21C5E014900429E10 /* CuisineViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CuisineViewCell.h; sourceTree = "<group>"; };
+		4B6327D31C5E014900429E10 /* CuisineViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CuisineViewCell.m; sourceTree = "<group>"; };
 		4B98D54F1C4CF7BA00D4E62E /* MainCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCollectionViewCell.h; sourceTree = "<group>"; };
 		4B98D5501C4CF7BA00D4E62E /* MainCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCollectionViewCell.m; sourceTree = "<group>"; };
 		4BCA0DAF1C4CECF200697F93 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -154,8 +160,26 @@
 				4B127EFD1C4E2FF400882EFC /* DishCollectionView.m */,
 				4B127EFF1C4E327600882EFC /* DishCollectionViewCell.h */,
 				4B127F001C4E327600882EFC /* DishCollectionViewCell.m */,
+				4B6327D21C5E014900429E10 /* CuisineViewCell.h */,
+				4B6327D31C5E014900429E10 /* CuisineViewCell.m */,
 			);
 			name = main;
+			sourceTree = "<group>";
+		};
+		4B62E43F1C5E1C89008B27AC /* custom */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = custom;
+			sourceTree = "<group>";
+		};
+		4B62E4401C5E1C93008B27AC /* datasources */ = {
+			isa = PBXGroup;
+			children = (
+				4B62E4411C5E1CAB008B27AC /* CuisineDataSource.h */,
+				4B62E4421C5E1CAB008B27AC /* CuisineDataSource.m */,
+			);
+			name = datasources;
 			sourceTree = "<group>";
 		};
 		4BE5324B1C4A46BF00493063 = {
@@ -278,6 +302,8 @@
 		4BE532A11C4A4F4400493063 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				4B62E4401C5E1C93008B27AC /* datasources */,
+				4B62E43F1C5E1C89008B27AC /* custom */,
 				4BE5328A1C4A470100493063 /* api */,
 				4BE532A41C4A5FEE00493063 /* models */,
 			);
@@ -498,12 +524,14 @@
 				4BE532A71C4A600400493063 /* MerchantSearch.m in Sources */,
 				4BE532AD1C4A61E900493063 /* PriceCompareItems.m in Sources */,
 				4BE532B81C4CBDAA00493063 /* MainNavigationController.m in Sources */,
+				4B6327D41C5E014900429E10 /* CuisineViewCell.m in Sources */,
 				4BE5325C1C4A46BF00493063 /* AppDelegate.m in Sources */,
 				4B127F011C4E327600882EFC /* DishCollectionViewCell.m in Sources */,
 				4B127EFE1C4E2FF400882EFC /* DishCollectionView.m in Sources */,
 				4BE532AA1C4A61DA00493063 /* SearchAddress.m in Sources */,
 				4BE5328D1C4A49CD00493063 /* API.m in Sources */,
 				4BE532591C4A46BF00493063 /* main.m in Sources */,
+				4B62E4431C5E1CAB008B27AC /* CuisineDataSource.m in Sources */,
 				4BE532A01C4A4EB200493063 /* SearchFoodInteractor.m in Sources */,
 				4B98D5511C4CF7BA00D4E62E /* MainCollectionViewCell.m in Sources */,
 			);
